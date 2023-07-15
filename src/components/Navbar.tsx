@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
   return (
     <header className="text-gray-600 body-font">
@@ -18,10 +20,18 @@ const Navbar = () => {
           <span className="ml-3 text-xl">Tailblocks</span>
         </a>
         <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-          <a className="mr-5 hover:text-gray-900">First Link</a>
-          <a className="mr-5 hover:text-gray-900">Second Link</a>
-          <a className="mr-5 hover:text-gray-900">Third Link</a>
-          <a className="mr-5 hover:text-gray-900">Fourth Link</a>
+          <Link to="/" className="mr-5 hover:text-gray-900">
+            Home
+          </Link>
+          <Link to="/all-books" className="mr-5 hover:text-gray-900">
+            All Books
+          </Link>
+          <Link to="/sign-in" className="mr-5 hover:text-gray-900">
+            SingIn
+          </Link>
+          <Link to="/sign-up" className="mr-5 hover:text-gray-900">
+            SingUp
+          </Link>
         </nav>
         <button className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
           Button
