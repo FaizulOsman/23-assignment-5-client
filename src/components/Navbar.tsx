@@ -23,6 +23,9 @@ const Navbar = () => {
           <Link to="/" className="mr-5 hover:text-gray-900">
             Home
           </Link>
+          <Link to="/add-new-book" className="mr-5 hover:text-gray-900">
+            Add New Book
+          </Link>
           <Link to="/all-books" className="mr-5 hover:text-gray-900">
             All Books
           </Link>
