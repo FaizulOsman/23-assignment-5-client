@@ -15,11 +15,26 @@ const Home = () => {
 
   return (
     <section className="text-gray-600 body-font">
-      <div className="container px-5 py-24 mx-auto">
-        <div className="flex flex-wrap -m-4">
-          {data?.data?.data?.map((book: IBook) => {
-            return <ProductCard book={book} key={book?._id} />;
-          })}
+      <div className="container px-5 py-10 mx-auto">
+        <div>
+          <h2 className="text-2xl mb-10 font-semibold text-center">
+            Top 10 Books
+          </h2>
+          <div className="flex flex-wrap -m-4">
+            {data?.data?.data?.map((book: IBook) => {
+              return <ProductCard book={book} key={book?._id} />;
+            })}
+          </div>
+        </div>
+        <div className="mt-20">
+          <h2 className="text-2xl mb-10 font-semibold text-center">
+            Recently Added Books
+          </h2>
+          <div className="flex flex-wrap -m-4">
+            {data?.data?.data?.map((book: IBook) => {
+              return <ProductCard book={book} key={book?._id} />;
+            })}
+          </div>
         </div>
       </div>
     </section>
