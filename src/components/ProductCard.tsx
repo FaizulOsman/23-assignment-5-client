@@ -5,7 +5,7 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ book }: ProductCardProps) => {
-  const { _id, imgUrl, genre, title, author } = book;
+  const { _id, imgUrl, genre, title, author, publicationDate } = book;
 
   return (
     <div key={_id} className="w-full md:w-1/3 lg:w-1/4 xl:w-1/5 p-4">
@@ -17,9 +17,12 @@ const ProductCard = ({ book }: ProductCardProps) => {
         />
       </a>
       <div className="mt-4">
-        <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
-          {genre}
-        </h3>
+        <div className="flex justify-between">
+          <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
+            {genre}
+          </h3>
+          <p>{publicationDate}</p>
+        </div>
         <h2 className="text-gray-900 title-font text-lg font-medium">
           {title}
         </h2>
