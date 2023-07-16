@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { api } from "../../api/apiSlice";
 
 const bookApi = api.injectEndpoints({
@@ -5,7 +6,10 @@ const bookApi = api.injectEndpoints({
     getAllBook: builder.query({
       query: () => "/books",
     }),
+    getSingleBook: builder.query({
+      query: (id) => ({ url: `/books/${id}` }),
+    }),
   }),
 });
 
-export const { useGetAllBookQuery } = bookApi;
+export const { useGetAllBookQuery, useGetSingleBookQuery } = bookApi;
