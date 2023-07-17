@@ -1,6 +1,6 @@
+import Loader from '@/components/Loader';
 import Book from '@/components/book';
 import { useGetTenBooksQuery } from '@/redux/features/book/bookApi';
-import { Loader } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Home() {
@@ -9,7 +9,6 @@ export default function Home() {
     <>
       {isLoading ? (
         <div className="flex justify-center items-center mt-16 mb-5 h-96">
-          {' '}
           <Loader />
         </div>
       ) : (
