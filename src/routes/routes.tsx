@@ -1,16 +1,20 @@
-import { createBrowserRouter } from "react-router-dom";
-import App from "../App";
-import Home from "../pages/Home";
-import AllBooks from "../pages/AllBooks";
-import SignIn from "../pages/SignIn";
-import SignUp from "../pages/SignUp";
-import ErrorPage from "../pages/ErrorPage";
-import AddNewBook from "../pages/AddNewBook";
-import BookDetails from "../pages/BookDetails";
+import { createBrowserRouter } from 'react-router-dom';
+import App from '@/App';
+import Login from '@/pages/Login';
+import NotFound from '@/pages/NotFound';
+import Home from '@/pages/Home';
+import Signup from '@/pages/Signup';
+import Books from '@/pages/Books';
+import BookDetails from '@/pages/BookDetails';
+import AddNewBook from '@/pages/AddNewBook';
+import EditBook from '@/pages/EditBook';
+import Wishlist from '@/pages/Wishlist';
+import ReadSoon from '@/pages/ReadSoon';
+import PrivateRoute from './privateRoute';
 
 const routes = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <App />,
     children: [
       {
@@ -18,30 +22,58 @@ const routes = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/add-new-book",
-        element: <AddNewBook />,
+        path: '/books',
+        element: <Books />,
       },
       {
-        path: "/all-books",
-        element: <AllBooks />,
+        path: '/wishlist',
+        element: (
+          <PrivateRoute>
+            <Wishlist />
+          </PrivateRoute>
+        ),
       },
       {
-        path: `/books/:id`,
+        path: '/has-been-read',
+        element: (
+          <PrivateRoute>
+            <ReadSoon />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/book-details/:id',
         element: <BookDetails />,
+      },
+      {
+        path: '/edit-book/:id',
+        element: (
+          <PrivateRoute>
+            <EditBook />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/add-new-book',
+        element: (
+          <PrivateRoute>
+            <AddNewBook />
+          </PrivateRoute>
+        ),
       },
     ],
   },
   {
-    path: "/sign-in",
-    element: <SignIn />,
+    path: '/login',
+    element: <Login />,
   },
   {
-    path: "/sign-up",
-    element: <SignUp />,
+    path: '/signup',
+    element: <Signup />,
   },
   {
-    path: "*",
-    element: <ErrorPage />,
+    path: '*',
+    element: <NotFound />,
   },
 ]);
 

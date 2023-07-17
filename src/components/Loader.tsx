@@ -1,7 +1,8 @@
-import "./Loader.css";
+import './Loader.css';
+
 const Loader = () => {
   return (
-    <div className="border flex justify-center items-center h-[92vh]">
+    <div>
       <span className="loader"></span>
     </div>
   );

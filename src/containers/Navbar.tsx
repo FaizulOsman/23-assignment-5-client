@@ -1,61 +1,139 @@
-import { Link } from "react-router-dom";
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { Link } from 'react-router-dom';
+import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/avatar';
+import { Button } from '../components/ui/button';
+import { DropdownMenuSeparator } from '../components/ui/dropdown-menu';
+import { DropdownMenuLabel } from '../components/ui/dropdown-menu';
+import {
+  DropdownMenuItem,
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+} from '../components/ui/dropdown-menu';
+import {
+  getFromLocalStorage,
+  removeFromLocalStorage,
+} from '@/utils/localstorage';
 
-const Navbar = () => {
+export default function Navbar() {
+  const user = JSON.parse(getFromLocalStorage('user-info')!);
+  const handleLogOut = () => {
+    removeFromLocalStorage('user-info');
+    removeFromLocalStorage('access-token');
+    window.location.reload();
+  };
   return (
-    <header className="text-gray-600 body-font">
-      <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-        <Link
-          to=""
-          className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            className="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
-            viewBox="0 0 24 24"
-          >
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-          </svg>
-          <span className="ml-3 text-xl">Tailblocks</span>
-        </Link>
-        <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-          <Link to="/" className="mr-5 hover:text-gray-900">
-            Home
-          </Link>
-          <Link to="/add-new-book" className="mr-5 hover:text-gray-900">
-            Add New Book
-          </Link>
-          <Link to="/all-books" className="mr-5 hover:text-gray-900">
-            All Books
-          </Link>
-          <Link to="/sign-in" className="mr-5 hover:text-gray-900">
-            SingIn
-          </Link>
-          <Link to="/sign-up" className="mr-5 hover:text-gray-900">
-            SingUp
-          </Link>
-        </nav>
-        <button className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
-          Button
-          <svg
-            fill="none"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            className="w-4 h-4 ml-1"
-            viewBox="0 0 24 24"
-          >
-            <path d="M5 12h14M12 5l7 7-7 7"></path>
-          </svg>
-        </button>
-      </div>
-    </header>
-  );
-};
+    <nav className="w-full h-24 fixed top backdrop-blur-lg z-10">
+      <div className="h-full w-full bg-white/60">
+        <div className="flex items-center justify-between w-full md:max-w-7xl h-full mx-auto ">
+          <div>
+            <Link to="/">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                className="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+              </svg>
+            </Link>
+          </div>
+          <div>
+            <ul className="flex items-center">
+              <li>
+                <Button variant="link" asChild>
+                  <Link to="/">Home</Link>
+                </Button>
+              </li>
+              <li>
+                <Button variant="link" asChild>
+                  <Link to="/books">All Books</Link>
+                </Button>
+              </li>
+              {user?.email && (
+                <>
+                  <li>
+                    <Button variant="link" asChild>
+                      <Link to="/add-new-book">Add New Book</Link>
+                    </Button>
+                  </li>
+                  <li>
+                    <Button variant="link">
+                      <Link to="/wishlist">Wishlist</Link>
+                    </Button>
+                  </li>
+                  <li>
+                    <Button variant="link">
+                      <Link to="/has-been-read">Has been read</Link>
+                    </Button>
+                  </li>
+                </>
+              )}
+            </ul>
+          </div>
+          <div>
+            <ul className="flex items-center">
+              <li className="ml-5">
+                <DropdownMenu>
+                  <DropdownMenuTrigger className="outline-none">
+                    <Avatar>
+                      <AvatarImage
+                        className="object-contain bg-slate-800"
+                        src="https://static.vecteezy.com/system/resources/previews/009/383/461/original/man-face-clipart-design-illustration-free-png.png"
+                      />
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuLabel>Account</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    {user?.name && (
+                      <DropdownMenuItem className="cursor-pointer">
+                        {user?.name}
+                      </DropdownMenuItem>
+                    )}
 
-export default Navbar;
+                    {user?.email && (
+                      <DropdownMenuItem className="cursor-pointer">
+                        {user?.email}
+                      </DropdownMenuItem>
+                    )}
+
+                    {!user?.email && (
+                      <>
+                        <Link to="/login">
+                          <DropdownMenuItem className="cursor-pointer">
+                            Login
+                          </DropdownMenuItem>
+                        </Link>
+
+                        <Link to="/signup">
+                          <DropdownMenuItem className="cursor-pointer">
+                            Sign Up
+                          </DropdownMenuItem>
+                        </Link>
+                      </>
+                    )}
+
+                    {user?.email && (
+                      <DropdownMenuItem
+                        className="cursor-pointer"
+                        onClick={() => handleLogOut()}
+                      >
+                        Log out
+                      </DropdownMenuItem>
+                    )}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+}

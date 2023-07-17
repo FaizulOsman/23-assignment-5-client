@@ -1,18 +1,30 @@
-import { api } from "../../api/apiSlice";
+import api from '@/redux/api/apiSlice';
 
-const bookApi = api.injectEndpoints({
+const userApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    register: builder.mutation<object, object>({
+    signUp: builder.mutation({
       query: (data) => ({
-        url: "/auth/register",
-        method: "POST",
+        url: `/auth/signup`,
+        method: 'POST',
         body: data,
       }),
     }),
-    getLoggedInUser: builder.query<object, object>({
-      query: () => ({ url: "/users" }),
+    login: builder.mutation({
+      query: (data) => ({
+        url: `/auth/login`,
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    refreshToken: builder.mutation({
+      query: (data) => ({
+        url: `/auth/refresh-token`,
+        method: 'POST',
+        body: data,
+      }),
     }),
   }),
 });
 
-export const { useRegisterMutation, useGetLoggedInUserQuery } = bookApi;
+export const { useSignUpMutation, useLoginMutation, useRefreshTokenMutation } =
+  userApi;

@@ -1,10 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { configureStore } from "@reduxjs/toolkit";
-import { api } from "./api/apiSlice";
-import userReducer from "./features/user/userSlice";
+import { configureStore } from '@reduxjs/toolkit';
+import bookReducer from './features/book/bookSlice';
+import { api } from './api/apiSlice';
+import userReducer from './features/user/userSlice';
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
+    book: bookReducer,
     user: userReducer,
     [api.reducerPath]: api.reducer,
   },
@@ -14,5 +15,3 @@ const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-
-export default store;
