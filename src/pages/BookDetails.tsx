@@ -349,6 +349,13 @@ export default function BookDetails() {
                 </span>
               </div>
 
+              <p className="leading-relaxed">
+                Reading is an act of civilization; it’s one of the greatest acts
+                of civilization because it takes the free raw material of the
+                mind and builds castles of possibilities.
+              </p>
+              <div className="flex mt-6 items-center pb-5  border-gray-100 mb-5"></div>
+
               <div className="flex absolute bottom-0 w-full">
                 {book?.data?.creator === user?.id && (
                   <div className="flex">

@@ -72,7 +72,7 @@ const Book = ({ data }: { data: IBook[] }) => {
               <div className="block cursor-pointer relative h-[500px] rounded overflow-hidden">
                 <img
                   alt="ecommerce"
-                  className="object-cover object-center w-full h-full block"
+                  className="object-cover hover:scale-110 transition-all object-center w-full h-full block"
                   src={book.image}
                 />
               </div>

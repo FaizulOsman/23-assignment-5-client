@@ -54,6 +54,20 @@ export default function Navbar() {
                   <Link to="/books">All Books</Link>
                 </Button>
               </li>
+              {user?.email || (
+                <>
+                  <li>
+                    <Button variant="link" asChild>
+                      <Link to="/login">Login</Link>
+                    </Button>
+                  </li>
+                  <li>
+                    <Button variant="link" asChild>
+                      <Link to="/signup">SignUp</Link>
+                    </Button>
+                  </li>
+                </>
+              )}
               {user?.email && (
                 <>
                   <li>
