@@ -54,20 +54,7 @@ export default function Navbar() {
                   <Link to="/books">All Books</Link>
                 </Button>
               </li>
-              {!user?.email && (
-                <>
-                  <li>
-                    <Button variant="link" asChild>
-                      <Link to="/login">Login</Link>
-                    </Button>
-                  </li>
-                  <li>
-                    <Button variant="link" asChild>
-                      <Link to="/signup">SignUp</Link>
-                    </Button>
-                  </li>
-                </>
-              )}
+
               {user?.email && (
                 <>
                   <li>
@@ -86,6 +73,26 @@ export default function Navbar() {
                     </Button>
                   </li>
                 </>
+              )}
+              {!user?.email ? (
+                <>
+                  <li>
+                    <Button variant="link" asChild>
+                      <Link to="/login">Login</Link>
+                    </Button>
+                  </li>
+                  <li>
+                    <Button variant="link" asChild>
+                      <Link to="/signup">SignUp</Link>
+                    </Button>
+                  </li>
+                </>
+              ) : (
+                <li>
+                  <Button onClick={() => handleLogOut()} variant="link" asChild>
+                    <Link to="">Log Out</Link>
+                  </Button>
+                </li>
               )}
             </ul>
           </div>
