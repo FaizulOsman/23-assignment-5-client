@@ -54,7 +54,7 @@ export default function Navbar() {
                   <Link to="/books">All Books</Link>
                 </Button>
               </li>
-              {user?.email || (
+              {!user?.email && (
                 <>
                   <li>
                     <Button variant="link" asChild>
