@@ -171,7 +171,16 @@ export default function BookDetails() {
 
   const handleAddToWishlist = () => {
     if (!user) {
-      return;
+      return toast.error(`Please login to add to wishlist`, {
+        position: 'top-right',
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
     }
     if (alreadyAddedToWishlist) {
       toast.error(`Already added to wishlist`, {
@@ -202,7 +211,16 @@ export default function BookDetails() {
 
   const handleAddToReadSoon = () => {
     if (!user) {
-      return;
+      return toast.error(`Please login to mark as read`, {
+        position: 'top-right',
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
     }
     if (alreadyAddedToReadSoonList) {
       toast.error(`Already added to wishlist`, {

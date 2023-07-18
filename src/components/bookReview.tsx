@@ -19,7 +19,7 @@ export default function BookReview(book: any) {
     event.preventDefault();
 
     if (!user) {
-      return toast.error(`Please login in to add review`, {
+      return toast.error(`Please login to add review`, {
         position: 'top-right',
         autoClose: 2500,
         hideProgressBar: false,
