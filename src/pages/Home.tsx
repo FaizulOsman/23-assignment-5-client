@@ -2,6 +2,7 @@ import Loader from '@/components/Loader';
 import Book from '@/components/book';
 import { useGetTenBooksQuery } from '@/redux/features/book/bookApi';
 import { Link } from 'react-router-dom';
+import BookImg from '../assets/images/Book.jpeg';
 
 export default function Home() {
   const { data, isLoading } = useGetTenBooksQuery(undefined);
@@ -15,11 +16,11 @@ export default function Home() {
         <div className="container">
           <section className="text-gray-600 body-font">
             <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
-              <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
+              <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0 border-4 border-gray-200 rounded-xl">
                 <img
-                  className="object-cover object-center rounded"
+                  className="object-cover object-center  rounded-xl"
                   alt="hero"
-                  src="https://thumbs.dreamstime.com/b/old-book-flying-letters-magic-light-background-bookshelf-library-ancient-books-as-symbol-knowledge-history-218640948.jpg"
+                  src={BookImg}
                 />
               </div>
               <div className="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
