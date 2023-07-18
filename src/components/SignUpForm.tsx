@@ -88,8 +88,6 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
     }
   }, [isError, isLoading, isSuccess, navigate, error, data]);
 
-  // console.log(isError, error, isLoading, isSuccess);
-
   return (
     <div className={cn('grid gap-6', className)} {...props}>
       <form onSubmit={handleSubmit(onSubmit)}>

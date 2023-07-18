@@ -27,7 +27,6 @@ const Book = ({ data }: { data: IBook[] }) => {
           userId: user?._id,
         },
       };
-      console.log(object, 'object');
       finishedReading(object);
     }
   }, [selectedBook]);

@@ -199,7 +199,7 @@ export default function BookDetails() {
   const alreadyAddedToReadSoonList = readSoonList?.data?.wishlist?.find(
     (book: IBook) => book?._id === id
   );
-  console.log(book);
+
   const handleAddToReadSoon = () => {
     if (!user) {
       return;
@@ -227,6 +227,10 @@ export default function BookDetails() {
     addToReadSoon(object);
   };
 
+  const ratings = book?.data?.reviews?.map((r: any) => r?.rating);
+  const sum = ratings?.reduce((acc: number, rating: number) => acc + rating, 0);
+  const average = sum / ratings?.length;
+
   return (
     <>
       <section className="text-gray-600 body-font overflow-hidden">
@@ -247,67 +251,55 @@ export default function BookDetails() {
               <h3 className="text-gray-900 text-xl title-font font-medium mb-1">
                 @ {book?.data?.author}
               </h3>
-              <div className="flex mb-14">
-                <span className="flex items-center">
-                  <svg
-                    fill="currentColor"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    className="w-4 h-4 text-yellow-500"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                  </svg>
-                  <svg
-                    fill="currentColor"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    className="w-4 h-4 text-yellow-500"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                  </svg>
-                  <svg
-                    fill="currentColor"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    className="w-4 h-4 text-yellow-500"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                  </svg>
-                  <svg
-                    fill="currentColor"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    className="w-4 h-4 text-yellow-500"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                  </svg>
-                  <svg
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    className="w-4 h-4 text-yellow-500"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                  </svg>
-                  <span className="text-gray-600 ml-3">
+
+              <div className="flex mb-14 mt-4 items-center">
+                <div className="border-r-2 border-gray-200 mr-3 pr-3">
+                  <span className="text-gray-600 font-semibold">
                     {' '}
-                    {book?.data?.reviews?.length} Reviews
+                    Reviews: {book?.data?.reviews?.length}
                   </span>
+                  <span className="flex items-center">
+                    {average ? (
+                      <span className="text-gray-600 font-semibold">
+                        {' '}
+                        Rating: {average?.toFixed(1)}
+                      </span>
+                    ) : (
+                      <> </>
+                    )}
+                  </span>
+                </div>
+                <span className="flex items-center">
+                  {[...Array(Math.round(average) || 0)].map((_, index) => (
+                    <svg
+                      key={index}
+                      fill="currentColor"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      className="w-4 h-4 text-yellow-500"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                  ))}
+                  {[...Array(5 - (Math.round(average) || 0))].map(
+                    (_, index) => (
+                      <svg
+                        key={index}
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        className="w-4 h-4 text-yellow-500"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                      </svg>
+                    )
+                  )}
                 </span>
                 <span className="flex ml-3 pl-3 py-2 border-l-2 border-gray-200 space-x-2s">
                   <a className="text-gray-500">
